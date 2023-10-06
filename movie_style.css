@@ -6,46 +6,83 @@
     padding: 0;
 }
 
-body {
-    background-color: #24252A;
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 100%;
+    padding: 30px 5%;
 }
 
-label {
+body{
+    background-color: pink;
+}
+
+label{
     display: block;
     margin-bottom: 8px;
 }
 
-input, select, textarea, option, label {
-    font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-}
-
-
-input, select, textarea, option {
+input, select, textarea{
     margin-bottom: 8px;
-    width: 100%;
 }
 
-#mDescription {
+textarea{
+    width: 250px;
     height: 150px;
     resize: none;
 }
 
-.container-inner {
-    max-width: 300px;
-    display: flex;
-    justify-content: center;
-    margin: 30px;
+.movie_table{
+
 }
 
-.container-outer {
-    background-color: white;
-    max-width: 350px;
-    display: flex;
-    justify-content: center;
-    border-radius: 25px;
-    margin: 30px;
+.movie_table th{
+    padding: 10px;
+    text-align: center;
 }
+
+
+
+/*body {*/
+/*    background-color: #24252A;*/
+/*}*/
+
+/*label {*/
+/*    display: block;*/
+/*    margin-bottom: 8px;*/
+/*}*/
+
+/*input, select, textarea, option, label {*/
+/*    font-family: "Montserrat", sans-serif;*/
+/*    font-size: 14px;*/
+/*}*/
+
+
+/*input, select, textarea, option {*/
+/*    margin-bottom: 8px;*/
+/*    width: 100%;*/
+/*}*/
+
+/*#mDescription {*/
+/*    height: 150px;*/
+/*    resize: none;*/
+/*}*/
+
+/*.container-inner {*/
+/*    max-width: 300px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin: 30px;*/
+/*}*/
+
+/*.container-outer {*/
+/*    background-color: white;*/
+/*    max-width: 350px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    border-radius: 25px;*/
+/*    margin: 30px;*/
+/*}*/
 
 
 

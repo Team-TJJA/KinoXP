@@ -7,16 +7,16 @@ fillDropdown(category, movieCategories, 'category');
 fillDropdown(ageLimit, ageLimits, 'age limit');
 
 
-document.addEventListener('DOMContentLoaded', createFormEventLisner);
+document.addEventListener('DOMContentLoaded', createFormEventListener);
 
 let movie_form;
 
-function createFormEventLisner() {
+function createFormEventListener() {
     movie_form = document.getElementById('movie_form');
-    movie_form.addEventListener('submit', handleSumbitForm);
+    movie_form.addEventListener('submit', handleSubmitForm);
 }
 
-async function handleSumbitForm(event) {
+async function handleSubmitForm(event) {
     event.preventDefault();
     const form = event.currentTarget;
     const url = form.action;
@@ -36,6 +36,16 @@ async function postFormDataAsJson(url, formData) {
     if(response.ok) {
         alert('Movie created'); //make error message appear above the 'create form' instead
     }
+
+}
+
+const url = "http://localhost:8080/movies"
+
+fetchAnyData(url);
+async function fetchAnyData (url){
+    const response = await fetch(url)
+    const data = await response.json()
+    console.log(data)
 }
 
 
