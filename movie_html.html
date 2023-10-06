@@ -8,24 +8,25 @@
 <body>
 <div class="container-outer">
     <div class="container-inner">
-        <form action="" method="post" id="create_movie_form">
+        <form id="movie_form" action="https://kinoxp-back.azurewebsites.net/movies" method="post">
             <label for="title">Title</label>
-            <input type="text" id="title">
+            <input id="title" name="title" type="text" placeholder="Enter movie title...">
 
             <label for="description">Description</label>
-            <textarea  id="description"></textarea>
+            <textarea id="description" name="description" placeholder="Enter movie description..."></textarea>
 
             <label for="category">Category</label>
-            <select id="category"></select>
+            <select id="category" name="category">
+            </select>
 
-            <label for="age_limit">Age limit</label>
-            <select id="age_limit"></select>
+            <label for="age_limit">Age Limit</label>
+            <select id="age_limit" name="ageLimit">
+            </select>
 
             <label for="photo">Photo</label>
-            <input type="text" id="photo">
+            <input id="photo" name="photo" type="text" placeholder="Insert photo...">
 
-            <button type="submit">Submit</button>
-
+            <button class="btn" type="submit" id="submit">Submit</button>
         </form>
     </div>
 </div>

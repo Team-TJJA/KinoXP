@@ -1,14 +1,34 @@
-function fillDropdown(dropdownElement, optionsArray) {
-    // Fjern eksisterende indhold i dropdown
-    dropdownElement.innerHTML = '';
+const ageLimits = ["A", "PG7", "PG11", "PG15", "F"];
+const movieCategories = ["ACTION", "COMEDY", "DRAMA", "ROMANCE", "HORROR", "SCIFI", "FANTASY", "SUPERHERO"];
 
-    // Iterer gennem optionsArray og tilføj hvert element som en option i dropdown
-    optionsArray.forEach((optionText => {
-        const option = document.createElement('option');
-        option.value = optionText;
-        option.text = optionText;
-        dropdownElement.appendChild(option);
-    }))
+function fillDropdown(dropdownId, array, defaultText) {
+    const firstElement = document.createElement('option');
+    firstElement.textContent = `Select ${defaultText}`;
+    firstElement.disabled = true;
+    firstElement.selected = true;
+    dropdownId.appendChild(firstElement);
+
+    array.forEach(element => {
+        const optionElement = document.createElement('option');
+        optionElement.textContent = element;
+        optionElement.value = element;
+        dropdownId.appendChild(optionElement);
+    });
 }
 
-export {fillDropdown}
+
+async function postOrPutObjectAsJson(url, object, HttpVerb) {
+    const objectToJsonString = JSON.stringify(object);
+    const fetchOption = {
+        method: HttpVerb,
+        headers: {'Content-type' : 'application/json'},
+        body: objectToJsonString
+    }
+
+    const response = await fetch(url, fetchOption);
+
+    return response;
+}
+
+
+export {fillDropdown, postOrPutObjectAsJson, ageLimits, movieCategories}
