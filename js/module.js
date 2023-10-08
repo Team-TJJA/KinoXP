@@ -16,7 +16,6 @@ function fillDropdown(dropdownId, array, defaultText) {
     });
 }
 
-
 async function postOrPutObjectAsJson(url, object, HttpVerb) {
     const objectToJsonString = JSON.stringify(object);
     const fetchOption = {
@@ -30,5 +29,14 @@ async function postOrPutObjectAsJson(url, object, HttpVerb) {
     return response;
 }
 
+async function restDelete(url) {
+    const fetchOption = {
+        method: "DELETE",
+        headers: {'Content-type' : 'application/json'},
+    }
+    const response = await fetch(url,fetchOption);
+    return response;
+}
 
-export {fillDropdown, postOrPutObjectAsJson, ageLimits, movieCategories}
+
+export {fillDropdown, postOrPutObjectAsJson, restDelete, ageLimits, movieCategories}

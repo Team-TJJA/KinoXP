@@ -9,6 +9,8 @@
 <div class="container">
     <div class="container-movie">
         <form id="movie_form" action="https://kinoxp-back.azurewebsites.net/movies" method="post">
+            <input id="id" name="movieID" type="hidden">
+
             <label for="title">Title</label>
             <input id="title" name="title" type="text" placeholder="Enter movie title...">
 
@@ -48,6 +50,8 @@
                     <th>Delete</th>
                 </tr>
             </thead>
+            <tbody id="movie_tbody">
+            </tbody>
         </table>
     </div>
 
