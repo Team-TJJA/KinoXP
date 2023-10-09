@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie</title>
+    <link rel="stylesheet" href="movie_style.css">
+</head>
+<body>
+<div class="container">
+    <div class="container-movie">
+        <form id="movie_form" action="https://kinoxp-back.azurewebsites.net/movies" method="post">
+            <input id="id" name="movieID" type="hidden">
+
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text" placeholder="Enter movie title...">
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Enter movie description..."></textarea>
+
+            <label for="category">Category</label>
+            <select id="category" name="category">
+            </select>
+
+            <label for="age_limit">Age Limit</label>
+            <select id="age_limit" name="ageLimit">
+            </select>
+
+            <label for="photo">Photo</label>
+            <input id="photo" name="photo" type="text" placeholder="Insert photo...">
+
+            <label for="duration">Duration (in total minutes)</label>
+            <input id="duration" name="duration" type="number">
+
+            <button class="btn" type="submit" id="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="container-table">
+        <table class="movie_table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Age Limit</th>
+                    <th>Photo</th>
+                    <th>Duration</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="movie_tbody">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+<script type="module" src="js/movie_script.js"></script>
+</html>
