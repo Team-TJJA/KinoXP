@@ -6,6 +6,7 @@ const ageLimit = document.getElementById('age_limit')
 fillDropdown(category, movieCategories, 'category');
 fillDropdown(ageLimit, ageLimits, 'age limit');
 
+const movie_url = "https://kinoxp-back.azurewebsites.net/movies"
 
 /*----------------------------------------------FORM---------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', createFormEventListener);
@@ -49,8 +50,6 @@ async function postAndPutFormDataAsJson(url, formData) {
 }
 
 /*--------------------------------------------FETCH DATA-------------------------------------------------*/
-
-const movie_url = "http://localhost:8080/movies";
 const movie_tbody = document.getElementById('movie_tbody');
 let movieArray;
 
