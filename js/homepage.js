@@ -1,12 +1,5 @@
-
-//Temporary - This is only for test
-const showDates = ['10-11-2023','11-11-2023','12-11-2023','13-11-2023','14-11-2023','15-11-2023','16-11-2023'];
-
 const moviePlayingDropdown = document.getElementById('moviePlayingDropdown');
 
-fillDropdown(moviePlayingDropdown,showDates,'date');
-
-//Modify if needed - If normal list, don't. If array with objects (key:value), modify a bit.
 function fillDropdown(dropdownId, array, defaultText) {
     const firstElement = document.createElement('option');
     firstElement.textContent = `Select ${defaultText}`;
@@ -24,13 +17,14 @@ function fillDropdown(dropdownId, array, defaultText) {
 
 /*------------------------DROPDOWN----------------------*/
 
-const showDatesURL = '';
+const showDatesURL = 'http://localhost:8080/showings/week';
 
-//actionFetchMovieDates(showDatesURL);
+actionFetchMovieDates(showDatesURL);
 
 async function actionFetchMovieDates(url) {
     const showDates = await fetchAnyData(url);
-    fillDropdown(moviePlayingDropdown,showDates,'date');
+    const showDatesText = await JSON.parse(showDates);
+    fillDropdown(moviePlayingDropdown,showDatesText,'date');
 }
 
 async function fetchAnyData(url) {
