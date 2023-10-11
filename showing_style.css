@@ -22,14 +22,8 @@ label{
     margin-bottom: 8px;
 }
 
-input, select, textarea{
+input, select{
     margin-bottom: 8px;
-}
-
-textarea{
-    width: 250px;
-    height: 150px;
-    resize: none;
 }
 
 .showing_table th{

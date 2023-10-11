@@ -1,13 +1,13 @@
-import {fillDropdown, postOrPutObjectAsJson, restDelete} from "./module.js";
+import {postOrPutObjectAsJson, restDelete} from "./module.js";
 const showing_date = document.getElementById("showing_date");
 const movie_id = document.getElementById('movie_id')
 const theater_id = document.getElementById('theater_id')
-const showings_url = "https://kinoxp-back.azurewebsites.net/showings"
+//const showings_url = "https://kinoxp-back.azurewebsites.net/showings"
+const showings_url = "http://localhost:8080/showings"
 
-fillDropdown(movie_id, fetchMovies(), 'Movie');
-fillDropdown(theater_id, ageLimits, 'Theater');
-
-/////////////////////////////////////////////////////////////////////////////////////////
+fetchMovies();
+fetchTheaters();
+fetchShowings();
 
 function setDate() {
     const today = new Date().toISOString().split('T')[0];
@@ -19,11 +19,7 @@ setDate();
 
 showing_date.addEventListener("change", function() {
     const selectedDate = showing_date.value;
-    console.log("Selected date: " + selectedDate);
 });
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
 /*----------------------------------------------FORM---------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', createFormEventListener);
 
@@ -48,11 +44,13 @@ async function handleSubmitForm(event) {
     }
 }
 
+
 async function postAndPutFormDataAsJson(url, formData) {
     const plainFormData = Object.fromEntries(formData.entries());
-    console.log(typeof plainFormData.movieID);
+    plainFormData.movie = {movieID: plainFormData.movie};
+    plainFormData.theater = {theaterID: plainFormData.theater};
     let response;
-    if(plainFormData.movieID !== '') {
+    if(plainFormData.showingID !== '') {
         response = await postOrPutObjectAsJson(url, plainFormData, 'PUT');
         if(response.ok) {
             alert('SHOWING UPDATED'); //make error message appear above the 'create form' instead
@@ -63,15 +61,11 @@ async function postAndPutFormDataAsJson(url, formData) {
             alert('SHOWING CREATED'); //make error message appear above the 'create form' instead
         }
     }
-
 }
 
 /*--------------------------------------------FETCH DATA-------------------------------------------------*/
 const showing_tbody = document.getElementById('showing_tbody');
 let showingArray;
-
-
-fetchShowings();
 
 async function fetchAnyData(url) {
     const response = await fetch(url);
@@ -85,9 +79,46 @@ async function fetchShowings() {
 }
 
 async function fetchMovies() {
-    showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/movies");
+    //showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/movies");
+    showingArray = await fetchAnyData("http://localhost:8080/movies");
+    fillMovieDropdown(movie_id, showingArray, 'Movie');
 }
 
+async function fetchTheaters() {
+    //showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/theaters");
+    showingArray = await fetchAnyData("http://localhost:8080/theaters");
+    fillTheaterDropdown(theater_id, showingArray, 'Theater');
+}
+
+function setTextContent(firstElement, defaultText) {
+    firstElement.textContent = `Select ${defaultText}`;
+    firstElement.disabled = true;
+    firstElement.selected = true;
+}
+
+function fillTheaterDropdown(dropdownId, array, defaultText) {
+    const firstElement = document.createElement('option');
+    setTextContent(firstElement, defaultText)
+    dropdownId.appendChild(firstElement);
+    array.forEach(element => {
+        const optionElement = document.createElement('option');
+        optionElement.textContent = element.size;
+        optionElement.value = element.theaterID;
+        dropdownId.appendChild(optionElement);
+    });
+}
+
+function fillMovieDropdown(dropdownId, array, defaultText) {
+    const firstElement = document.createElement('option');
+    setTextContent(firstElement, defaultText)
+    dropdownId.appendChild(firstElement);
+    array.forEach(element => {
+        const optionElement = document.createElement('option');
+        optionElement.textContent = element.title;
+        optionElement.value = element.movieID;
+        dropdownId.appendChild(optionElement);
+    });
+}
 
 /*-------------------------------------------CREATE TABLE------------------------------------------------*/
 /** CreateTableRow:
@@ -95,7 +126,7 @@ async function fetchMovies() {
  *  1. It creates the tr-tag (tablerow) 'trContainer'. This is our container for one row in the table.
  *  2. The dataObject (movie) recieved as parameter is looped through.
  *  3. Inside the loop a td-tag will be created and stored in the variable tdElement.
- *  4. The if-statement will check for either the property is a a photo or not and append it to the tdElement.
+ *  4. The if-statement will check for either the property is a photo or not and append it to the tdElement.
  *  5. At then end of the loop we will append/place the tdElement into the trContainer.
  *     So in generel from the dataObjects properties we create elements and put them all in a "box" / trContainer.
  *  6. We call the function createUpdateMovieButton that returns a td element that we store in updateAction.
@@ -112,14 +143,20 @@ function createTableRow(dataObject, tableElement) {
         // 3.
         const tdElement = document.createElement('td');
         // 4.
-        if(property === 'photo') {
+        if(property === 'movie') {
+            const movie = dataObject.movie;
+            const tdElement2 = document.createElement('td');
+            tdElement2.textContent = movie.title;
+            trContainer.appendChild(tdElement2)
             const img = document.createElement('img');
-            img.setAttribute("src", dataObject[property]);
+            img.setAttribute("src", movie.photo);
             img.setAttribute("alt", "movie photo");
             img.setAttribute("width", 100);
             img.setAttribute("height", 80);
             tdElement.appendChild(img);
-
+        } else if (property === 'theater') {
+            const theater = dataObject.theater;
+            tdElement.textContent = theater.size;
         } else {
             tdElement.textContent = dataObject[property];
         }
@@ -127,30 +164,29 @@ function createTableRow(dataObject, tableElement) {
         trContainer.appendChild(tdElement);
     }
     // 6.
-    const updateAction = createUpdateMovieButton(dataObject);
+    const updateAction = createUpdateShowingButton(dataObject);
     trContainer.appendChild(updateAction);
     // 7.
-    const deleteAction = createDeleteMovieButton(trContainer, dataObject);
+    const deleteAction = createDeleteShowingButton(trContainer, dataObject);
     trContainer.appendChild(deleteAction);
     // 8.
     tableElement.appendChild(trContainer);
 }
 
 /*---------------------------------------CREATE UPDATE BUTTON--------------------------------------------*/
-
-function createUpdateMovieButton(dataObject) {
+function createUpdateShowingButton(dataObject) {
     const updateAction = document.createElement('td');
     const updateButton = document.createElement('button');
     updateButton.textContent = 'Update';
     updateButton.addEventListener('click', () => {
-        const { movieID, title, description, category, ageLimit, photo } = dataObject;
+        const { showingID, price, movie, theater, showDate, showTime } = dataObject;
 
-        document.getElementById('id').setAttribute('value', movieID);
-        document.getElementById('title').setAttribute('value', title);
-        document.getElementById('description').textContent = description;
-        document.getElementById('category').value = category;
-        document.getElementById('age_limit').value = ageLimit;
-        document.getElementById('photo').setAttribute('value', photo);
+        document.getElementById('id').setAttribute('value', showingID);
+        document.getElementById('price').value = price;
+        document.getElementById('movie_id').value = movie.movieID;
+        document.getElementById('theater_id').value = theater.theaterID;
+        document.getElementById('showing_date').value = showDate;
+        document.getElementById('showing_time').value = showTime;
     });
 
     updateAction.appendChild(updateButton);
@@ -158,23 +194,13 @@ function createUpdateMovieButton(dataObject) {
     return updateAction;
 }
 
-//TODO:
-// - Figure out a way to display that a movie has been created and updated
-// - Figure out a way to display that you are now updating a movie
-
-function displayChangesToMovieTable(movie) {
-
-}
-
-/*---------------------------------------CREATE DELETE BUTTON--------------------------------------------*/
-
-function createDeleteMovieButton(trContainer, dataObject) {
+function createDeleteShowingButton(trContainer, dataObject) {
     const deleteAction = document.createElement('td');
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', function() {
         trContainer.remove();
-        deleteObjectById(dataObject.movieID);
+        deleteObjectById(dataObject.showingID);
     });
 
     deleteAction.appendChild(deleteButton);

@@ -8,25 +8,26 @@
 <body>
 <div class="container">
     <div class="container-showing">
-        <form id="showing_form" action="https://kinoxp-back.azurewebsites.net/showing" method="post">
+       <!-- <form id="showing_form" action="https://kinoxp-back.azurewebsites.net/showings" method="post"> -->
+        <form id="showing_form" action="http://localhost:8080/showings" method="post">
             <input id="id" name="showingID" type="hidden">
 
             <label for="showing_date">Date</label>
-            <input type="date" id="showing_date" name="showing_date">
+            <input type="date" id="showing_date" name="showDate" required pattern="\d{4}-\d{2}-\d{2}">
 
             <label for="showing_time">Time</label>
-            <input type="time" id="showing_time" name="showing_time">
+            <input type="time" id="showing_time" name="showTime" required>
 
             <label for="price">Price</label>
-            <textarea id="price" name="price" placeholder="100">
-            </textarea>
+            <input id="price" name="price" placeholder="100" required>
+            </input>
 
             <label for="movie_id">Movie</label>
-            <select id="movie_id" name="movie_id">
+            <select id="movie_id" name="movie" required>
             </select>
 
             <label for="theater_id">Theater</label>
-            <select id="theater_id" name="theater_id">
+            <select id="theater_id" name="theater" required>
             </select>
 
             <button class="btn" type="submit" id="submit">Submit</button>
@@ -38,12 +39,12 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Date</th>
-                <th>Time</th>
                 <th>Price</th>
                 <th>Movie Title</th>
                 <th>Movie Photo</th>
                 <th>Theater</th>
+                <th>Time</th>
+                <th>Date</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>

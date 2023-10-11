@@ -24,6 +24,7 @@ async function postOrPutObjectAsJson(url, object, HttpVerb) {
         body: objectToJsonString
     }
 
+
     const response = await fetch(url, fetchOption);
 
     return response;
