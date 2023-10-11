@@ -1,13 +1,17 @@
-import {postOrPutObjectAsJson, restDelete} from "./module.js";
+import {fillObjectDropdown, postOrPutObjectAsJson, restDelete} from "./module.js";
 const showing_date = document.getElementById("showing_date");
 const movie_id = document.getElementById('movie_id')
 const theater_id = document.getElementById('theater_id')
-//const showings_url = "https://kinoxp-back.azurewebsites.net/showings"
-const showings_url = "http://localhost:8080/showings"
+const showings_url = "https://kinoxp-back.azurewebsites.net/showings"
 
-fetchMovies();
-fetchTheaters();
-fetchShowings();
+init();
+
+function init() {
+    fetchMovies();
+    fetchTheaters();
+    fetchShowings();
+    setDate();
+}
 
 function setDate() {
     const today = new Date().toISOString().split('T')[0];
@@ -15,11 +19,6 @@ function setDate() {
     showing_date.setAttribute("value", today);
 }
 
-setDate();
-
-showing_date.addEventListener("change", function() {
-    const selectedDate = showing_date.value;
-});
 /*----------------------------------------------FORM---------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', createFormEventListener);
 
@@ -30,7 +29,6 @@ function createFormEventListener() {
     showing_form.addEventListener('submit', handleSubmitForm);
 }
 
-//ADD to Module
 async function handleSubmitForm(event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -40,7 +38,7 @@ async function handleSubmitForm(event) {
         const formData = new FormData(form);
         await postAndPutFormDataAsJson(url, formData);
     } catch(error) {
-        alert(error.message); //make error message appear above the 'create form' instead
+        alert(error.message);
     }
 }
 
@@ -53,12 +51,12 @@ async function postAndPutFormDataAsJson(url, formData) {
     if(plainFormData.showingID !== '') {
         response = await postOrPutObjectAsJson(url, plainFormData, 'PUT');
         if(response.ok) {
-            alert('SHOWING UPDATED'); //make error message appear above the 'create form' instead
+            alert('SHOWING UPDATED');
         }
     } else {
         response = await postOrPutObjectAsJson(url, plainFormData, 'POST');
         if(response.ok) {
-            alert('SHOWING CREATED'); //make error message appear above the 'create form' instead
+            alert('SHOWING CREATED');
         }
     }
 }
@@ -79,45 +77,13 @@ async function fetchShowings() {
 }
 
 async function fetchMovies() {
-    //showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/movies");
-    showingArray = await fetchAnyData("http://localhost:8080/movies");
-    fillMovieDropdown(movie_id, showingArray, 'Movie');
+    showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/movies");
+    fillObjectDropdown(movie_id, showingArray, 'Movie', "title", "movieID");
 }
 
 async function fetchTheaters() {
-    //showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/theaters");
-    showingArray = await fetchAnyData("http://localhost:8080/theaters");
-    fillTheaterDropdown(theater_id, showingArray, 'Theater');
-}
-
-function setTextContent(firstElement, defaultText) {
-    firstElement.textContent = `Select ${defaultText}`;
-    firstElement.disabled = true;
-    firstElement.selected = true;
-}
-
-function fillTheaterDropdown(dropdownId, array, defaultText) {
-    const firstElement = document.createElement('option');
-    setTextContent(firstElement, defaultText)
-    dropdownId.appendChild(firstElement);
-    array.forEach(element => {
-        const optionElement = document.createElement('option');
-        optionElement.textContent = element.size;
-        optionElement.value = element.theaterID;
-        dropdownId.appendChild(optionElement);
-    });
-}
-
-function fillMovieDropdown(dropdownId, array, defaultText) {
-    const firstElement = document.createElement('option');
-    setTextContent(firstElement, defaultText)
-    dropdownId.appendChild(firstElement);
-    array.forEach(element => {
-        const optionElement = document.createElement('option');
-        optionElement.textContent = element.title;
-        optionElement.value = element.movieID;
-        dropdownId.appendChild(optionElement);
-    });
+    showingArray = await fetchAnyData("https://kinoxp-back.azurewebsites.net/theaters");
+    fillObjectDropdown(theater_id, showingArray, 'Theater', "size", "theaterID");
 }
 
 /*-------------------------------------------CREATE TABLE------------------------------------------------*/
