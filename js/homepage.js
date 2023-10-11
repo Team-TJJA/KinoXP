@@ -41,11 +41,17 @@ async function fetchAnyData(url) {
 
 /*------------------------SHOWING CARDS----------------------*/
 
+let showCardsUrlByDate = 'http://localhost:8080/showings/';
+
+moviePlayingDropdown.addEventListener('change', function (event){
+    const date = event.target.value;
+    showCardsUrlByDate = showCardsUrlByDate + date;
+})
+
+
 const mainContainer = document.getElementById('main-container');
 
-const showCards = '';
-
-async function actionFetcShowings(url) {
+async function actionFetchShowings(url) {
     const showings = await fetchAnyData(url);
     showings.forEach(createShowingCard);
 }
