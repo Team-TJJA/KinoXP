@@ -48,14 +48,11 @@ h1 {
 header a {
     text-decoration: none;
     transition: all 0.3s ease-in-out;
+    color: white;
 }
 
 header a:hover {
     transform: scale(1.18);
-}
-
-header a:visited {
-    color: white;
 }
 
 .navigation a {
@@ -213,22 +210,15 @@ main h2 {
     flex-wrap: wrap;
 }
 
-.showingButton {
-    margin: 38px 15px;
-    padding: 5px 25px;
-    background-color: lightblue;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    color: azure;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+.timeItem {
+    color: white;
+    text-decoration: none;
 }
 
-.showingButton:hover {
-    background-color: rgb(115, 161, 177);
+.reservationInfo {
+    display: flex;
+    padding: 5px 15px;
 }
-
 
 /*--------------------FOOTER--------------------*/
 
