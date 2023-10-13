@@ -1,27 +1,21 @@
+import {fillDropdown} from "./module.js";
 const dateDropdown = document.getElementById('dateDropdown');
 const reservationURL = "https://mango-cliff-0e58c8803.3.azurestaticapps.net/reservation"
-let showingUrlByDate = 'https://kinoxp-back.azurewebsites.net/showings/';
+const showingUrlByDate = 'https://kinoxp-back.azurewebsites.net/showings/';
 
-function fillDropdown(dropdownId, array) {
-    array.forEach(element => {
-        const optionElement = document.createElement('option');
-        optionElement.textContent = element;
-        optionElement.value = element;
-        dropdownId.appendChild(optionElement);
-    });
+function fillDateDropdown(dropdownID, array, defaultText) {
+    fillDropdown(dropdownID, array, defaultText);
+    dropdownID.removeChild(dateDropdown.options[0]);
     loadShowingsToday();
 }
 
 /*------------------------DROPDOWN----------------------*/
-
-const showDatesURL = 'https://kinoxp-back.azurewebsites.net/showings/week';
-
-actionFetchMovieDates(showDatesURL);
+actionFetchMovieDates(showingUrlByDate + "week");
 
 async function actionFetchMovieDates(url) {
-    const showDates = await fetchAnyData(url);
-    const showDatesText = await JSON.parse(showDates);
-    fillDropdown(dateDropdown, showDatesText);
+    const showingDates = await fetchAnyData(url);
+    const showingDatesText = await JSON.parse(showingDates);
+    fillDateDropdown(dateDropdown, showingDatesText, 'date');
 }
 
 async function fetchAnyData(url) {
