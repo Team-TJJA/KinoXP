@@ -1,6 +1,6 @@
-const moviePlayingDropdown = document.getElementById('moviePlayingDropdown');
+const dateDropdown = document.getElementById('dateDropdown');
 const reservationURL = "https://mango-cliff-0e58c8803.3.azurestaticapps.net/reservation"
-let showUrlByDate = 'https://kinoxp-back.azurewebsites.net/showings/';
+let showingUrlByDate = 'https://kinoxp-back.azurewebsites.net/showings/';
 
 function fillDropdown(dropdownId, array) {
     array.forEach(element => {
@@ -9,7 +9,7 @@ function fillDropdown(dropdownId, array) {
         optionElement.value = element;
         dropdownId.appendChild(optionElement);
     });
-    loadShowsToday();
+    loadShowingsToday();
 }
 
 /*------------------------DROPDOWN----------------------*/
@@ -21,7 +21,7 @@ actionFetchMovieDates(showDatesURL);
 async function actionFetchMovieDates(url) {
     const showDates = await fetchAnyData(url);
     const showDatesText = await JSON.parse(showDates);
-    fillDropdown(moviePlayingDropdown, showDatesText);
+    fillDropdown(dateDropdown, showDatesText);
 }
 
 async function fetchAnyData(url) {
@@ -38,22 +38,21 @@ async function fetchAnyData(url) {
 
 /*------------------------SHOWING CARDS----------------------*/
 
-moviePlayingDropdown.addEventListener('change', function (event) {
+dateDropdown.addEventListener('change', function (event) {
     const date = event.target.value;
-    const showCardsUrlByDate = showUrlByDate + date;
-    actionFetchShowings(showCardsUrlByDate);
+    const showingCardsUrlByDate = showingUrlByDate + date;
+    actionFetchShowings(showingCardsUrlByDate);
 })
 
-function loadShowsToday() {
-    moviePlayingDropdown.selectedIndex = 0;
-    const date = moviePlayingDropdown.options[moviePlayingDropdown.selectedIndex].value;
-    const showCardsUrlByDate = showUrlByDate + date;
+function loadShowingsToday() {
+    dateDropdown.selectedIndex = 0;
+    const date = dateDropdown.options[dateDropdown.selectedIndex].value;
+    const showCardsUrlByDate = showingUrlByDate + date;
     actionFetchShowings(showCardsUrlByDate);
 }
 
 function separateShowingsByMovieTitleAndTheater(arrayOfShowings) {
     const showingsByTitleAndTheater= {};
-    console.log(arrayOfShowings)
     arrayOfShowings.forEach(showing => {
         const title = showing.movie.movieID;
         const theater = showing.theater.theaterID;
@@ -87,11 +86,11 @@ function createShowingCards(arrayOfarraysOfShowings) {
         showingContainer.classList.add('showingContainer');
 
         //Create img and append it to showingContainer
-        const showImg = document.createElement('img');
-        showImg.classList.add('showingPic');
-        showImg.setAttribute('src', showing.movie.photo);
-        showImg.setAttribute('alt', 'movie photo');
-        showingContainer.appendChild(showImg);
+        const showingImage = document.createElement('img');
+        showingImage.classList.add('showingPic');
+        showingImage.setAttribute('src', showing.movie.photo);
+        showingImage.setAttribute('alt', 'movie photo');
+        showingContainer.appendChild(showingImage);
 
         //Create showingInfo
         const showInfo = document.createElement('div');
@@ -109,7 +108,6 @@ function createShowingCards(arrayOfarraysOfShowings) {
 
         const showTime = document.createElement('div');
         showTime.classList.add('showingTime');
-        //Use this if its an array of times objects may add one more loop.
         showingArray.forEach(showing => {
             const timeItem = document.createElement('a');
             timeItem.classList.add('timeItem');
