@@ -106,7 +106,9 @@ function createShowingCards(arrayOfarraysOfShowings) {
             const timeItem = document.createElement('a');
             timeItem.classList.add('timeItem');
             timeItem.textContent = showing.showTime;
-            timeItem.href = reservationURL + "/" + showing.showingID;
+            const localStorageKey = `showing${showing.showingID}`;
+            localStorage.setItem(localStorageKey, JSON.stringify(showing));
+            timeItem.href = reservationURL;
             showTime.appendChild(timeItem);
         });
 
