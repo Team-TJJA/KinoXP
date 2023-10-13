@@ -1,7 +1,9 @@
-import {fillDropdown, postOrPutObjectAsJson, restDelete, ageLimits, movieCategories} from "./module.js";
+import {fillDropdown, postOrPutObjectAsJson, restDelete} from "./module.js";
 
 const category = document.getElementById('category')
 const ageLimit = document.getElementById('age_limit')
+const ageLimits = ["A", "PG7", "PG11", "PG15", "F"];
+const movieCategories = ["ACTION", "COMEDY", "DRAMA", "ROMANCE", "HORROR", "SCIFI", "FANTASY", "SUPERHERO"];
 
 fillDropdown(category, movieCategories, 'category');
 fillDropdown(ageLimit, ageLimits, 'age limit');
