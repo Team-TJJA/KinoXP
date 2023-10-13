@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Showing</title>
+    <link rel="stylesheet" href="showing_style.css">
+</head>
+<body>
+<div class="container">
+    <div class="container-showing">
+        <form id="showing_form" action="https://kinoxp-back.azurewebsites.net/showings" method="post">
+            <input id="id" name="showingID" type="hidden">
+
+            <label for="showing_date">Date</label>
+            <input type="date" id="showing_date" name="showDate" required pattern="\d{4}-\d{2}-\d{2}">
+
+            <label for="showing_time">Time</label>
+            <input type="time" id="showing_time" name="showTime" required>
+
+            <label for="price">Price</label>
+            <input id="price" name="price" placeholder="100" required>
+            </input>
+
+            <label for="movie_id">Movie</label>
+            <select id="movie_id" name="movie" required>
+            </select>
+
+            <label for="theater_id">Theater</label>
+            <select id="theater_id" name="theater" required>
+            </select>
+
+            <button class="btn" type="submit" id="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="container-table">
+        <table class="showing_table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Price</th>
+                <th>Movie Title</th>
+                <th>Movie Photo</th>
+                <th>Theater</th>
+                <th>Time</th>
+                <th>Date</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody id="showing_tbody">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+<script type="module" src="js/showing_script.js"></script>
+</html>
