@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/seating_style.css">
+
+</head>
+
+<div class="container_navigation">
+    <div class="anchor_homepage">
+        <a href="index.html"><h1>KinoXP</h1></a>
+    </div>
+    <div class="navigation_bar">
+        <nav class="navigation_bar">
+            <a href="#header_movie">Movie</a>
+            <a href="#header_seat">Seat</a>
+            <a href="#order">Order</a>
+        </nav>
+    </div>
+</div>
+<body>
+
+
+<div class="header_movie" id="header_movie">
+    <h2>Movie</h2>
+</div>
+<div class="container_movie_information" id="container_movie_information">
+    <div class="movie_poster" id="movie_poster">
+        <img src="https://static.posters.cz/image/750/plakater/iron-man-one-sheet-i3287.jpg" alt="NO PHOTO">
+    </div>
+
+    <div class="movie_info" id="movie_info">
+        <p>Title:</p>
+        <p>Theater:</p>
+        <p>Description:</p>
+        <p>Duration:</p>
+        <p>Age Limit:</p>
+    </div>
+</div>
+
+
+<div class="header_seat" id="header_seat">
+    <h2>Seat</h2>
+</div>
+
+<div class="container_seat" id="container_seat">
+    <ul class="showcase">
+        <li>
+            <div class="seat"></div>
+            <small>N/A</small>
+        </li>
+        <li>
+            <div class="seat selected"></div>
+            <small>Selected</small>
+        </li>
+        <li>
+            <div class="seat occupied"></div>
+            <small>Occupied</small>
+        </li>
+    </ul>
+
+    <div class="container">
+        <div class="screen"></div>
+        <div class="row-container"></div>
+    </div>
+
+
+</div>
+
+
+<div id="order">
+    <h2>Order</h2>
+</div>
+<div class="container_order" id="container_order"></div>
+<div class="seats_and_price" id="seats_and_price"></div>
+<div class="customer_info" id="customer_info"></div>
+<div class="order_movie_info" id="order_movie_info"></div>
+<div class="button_place_order">
+    <button>place order</button>
+</div>
+
+
+</body>
+<script src="js/seating.js"></script>
+</html>
