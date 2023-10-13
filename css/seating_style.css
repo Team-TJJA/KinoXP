@@ -2,39 +2,6 @@
     box-sizing: border-box;
 }
 
-.container_movie_information{
-    display: flex;
-    align-items: center;
-}
-
-.movie_poster {
-    flex: 1;
-    margin: 5% ;
-}
-
-.movie_info{
-    flex: 2;
-}
-
-.container_navigation {
-    display: flex;
-    justify-content: space-between; /* Distribute the content to the ends of the container */
-    align-items: center; /* Vertically center the content */
-}
-
-.anchor_homepage {
-    order: 1; /* Set the order of this div to 1 to make it appear on the left */
-    margin-right: auto; /* Push it to the left as much as possible */
-}
-
-
-.navigation_bar {
-    order: 2; /* Set the order of this div to 2 to make it appear on the right */
-}
-
-
-
-
 body {
     background-color: #242333;
     display: flex;
