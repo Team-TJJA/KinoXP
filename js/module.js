@@ -1,6 +1,3 @@
-const ageLimits = ["A", "PG7", "PG11", "PG15", "F"];
-const movieCategories = ["ACTION", "COMEDY", "DRAMA", "ROMANCE", "HORROR", "SCIFI", "FANTASY", "SUPERHERO"];
-
 function setTextContent(firstElement, defaultText) {
     firstElement.textContent = `Select ${defaultText}`;
     firstElement.disabled = true;
@@ -53,4 +50,4 @@ async function restDelete(url) {
 }
 
 
-export {fillDropdown, fillObjectDropdown, postOrPutObjectAsJson, restDelete, ageLimits, movieCategories}
+export {fillDropdown, fillObjectDropdown, postOrPutObjectAsJson, restDelete}
