@@ -2,9 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>KinoXP</title>
 </head>
 <body>
+<div id="homeHeader"></div>
+<header>
+    <a href="index.html"><h1>KinoXP</h1 ></a>
+    <nav class="navigation">
+        <a href="#homeHeader">HOME</a>
+        <a href="#moviesPlaying">MOVIES</a>
+        <a href="#comingSoon">COMING SOON</a>
+        <a href="#contact">CONTACTS & INFO</a>
+        <a href="#">ABOUT</a>
+        <a class="btn" href="admin_movie.html">LOGIN</a>
+    </nav>
+</header>
 
+<main>
+    <div class="welcomeText">
+        <h2>" Step into a world of cinematic wonder and immerse yourself in the magic of storytelling. We are thrilled to have you here, ready to embark on a journey filled with laughter, tears, and moments that will stay with you long after the credits roll " - <span>KinoXP</span>.</h2>
+    </div>
+
+    <div id="moviesPlaying">
+        <h2>MOVIES PLAYING</h2>
+        <select name="dateDropdown" id="dateDropdown">
+        </select>
+    </div>
+
+    <div class="main-container" id="main-container1">
+    </div>
+
+    <div id="comingSoon">
+        <h2 >COMING SOON!</h2>
+        <select name="" id="comingSoonDropdown">
+            <option value="">CHOOSE DATA</option>
+            <option value="">test1</option>
+            <option value="">test1</option>
+        </select>
+    </div>
+    <div class="main-container" id="main-container2">
+    </div>
+</main>
+
+<footer id="contact">
+    <div class="item-1">
+        <div>
+            <h4>KinoXP</h4>
+            <p>Email: <span>order@kinoxp.com</span></p>
+            <p>Email: <span>11 22 33 44 </span></p>
+        </div>
+
+        <div>
+            <h4>OPENING HOURS</h4>
+            <p>
+                The cinema opens 30 minutes before the first show - and closes 15 minutes after the last show.
+            </p>
+            <p>
+                Inquiries by email are answered within general. office hours (weekdays between 9 a.m. and 4 p.m.). We endeavor to answer all inquiries within 1-2 working days.
+            </p>
+            <p>
+                The phone is open from 13.00 - 17.00
+            </p>
+            <p>
+                Kalvebod Brygge 57
+                1560 Copenhagen V
+            </p>
+        </div>
+    </div>
+
+    <div class="item-2">
+        <h4>PRATICAL INFO</h4>
+        <a href="#">Wheelchair users</a>
+        <a href="#">Parking</a>
+        <a href="#">Transport</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Dolor sit</a>
+        <a href="#">Consectetur</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Dolor sit</a>
+        <a href="#">Consectetur</a>
+    </div>
+
+    <div class="item-3">
+        <h4>SALE</h4>
+        <a href="#">Tickets</a>
+        <a href="#">Gift cards</a>
+        <a href="#">Schools</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Dolor sit</a>
+        <a href="#">Consectetur</a>
+        <a href="#">Lorem ipsum</a>
+        <a href="#">Dolor sit</a>
+        <a href="#">Consectetur</a>
+    </div>
+
+    <div class="item-4">
+        <h4>ABOUT THE CINEMA</h4>
+        <a href="#">Questions and answers</a>
+        <a href="#">Administration</a>
+        <a href="#">Cookies policy</a>
+        <a href="#">Personal information</a>
+        <a href="#">Condition of sale</a>
+        <a href="#">Jobs in KinoXp</a>
+    </div>
+</footer>
+
+<script type="module" src="js/homepage.js"></script>
 </body>
 </html>
