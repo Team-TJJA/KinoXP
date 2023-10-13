@@ -21,7 +21,7 @@ function createFormEventListener() {
 async function handleSubmitForm(event) {
     event.preventDefault();
     const form = event.currentTarget;
-    const url = form.action;7
+    const url = form.action;
 
     try {
         const formData = new FormData(form);
