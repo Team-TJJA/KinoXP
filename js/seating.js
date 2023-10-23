@@ -26,7 +26,6 @@ function updateSelectedCount() {
         return [...seats].indexOf(seat);
     });
     console.log(seatsIndex);
-    //localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
     const selectedSeatCount = selectedSeats.length;
     console.log(selectedSeatCount);
     count.innerText = selectedSeatCount;
@@ -60,7 +59,7 @@ function createSeats(createRow, rowNumber, arrayOfSeats) {
         const createSeat = document.createElement('div');
         createSeat.classList = 'seat';
         let seat = arrayOfSeats[seatNumber*rowNumber-1];
-        createSeat.value = seat
+        createSeat.value = seat;
         createSeat.id = `seat${seat.seatID}`;
         createRow.appendChild(createSeat);
     }
